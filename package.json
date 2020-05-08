@@ -3,37 +3,52 @@
   "version": "0.0.1",
   "description": "A boilerplate for starting js code",
   "keywords": [
-    "js-starter",
-    "boilerplate"
+    "Team-007",
+    "BackEnd API"
   ],
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "directories": {
-    "test": "__tests__"
-  },
   "scripts": {
+    "start": "node ./dist/app.js",
+    "serve": "nodemon ./dist/app.js",
+    "watch": "watch 'npm run build' src",
+    "prebuild": "rimraf dist",
+    "build": "babel src -d dist --ignore '**/*.test.js'",
+    "postbuild": "mkdir dist/logs && touch dist/logs/access.log",
+    "heroku-postbuild": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cover": "jest --coverage",
-    "lint": "eslint \"src/**/*.js\"",
-    "start": "parcel ./src/index.html"
+    "lint": "eslint \"src/**/*.js\""
   },
   "author": {
-    "name": "Build For SDG",
+    "name": "Team-007",
     "email": "buildforsdg@andela.com"
   },
-  "homepage": "https://github.com/BuildForSDG/js-starter#readme",
+  "homepage": "https://github.com/BuildForSDG/Team-007-BackEnd#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BuildForSDG/js-starter.git"
+    "url": "https://github.com/BuildForSDG/Team-007-BackEnd.git"
   },
   "bugs": {
-    "url": "https://github.com/BuildForSDG/js-starter/issues"
+    "url": "https://github.com/BuildForSDG/Team-007-BackEnd/issues"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "app-root-path": "3.0.0",
+    "body-parser": "1.19.0",
+    "chalk": "4.0.0",
+    "cors": "2.8.5",
+    "debug": "4.1.1",
+    "express": "4.17.1",
+    "mongodb": "3.5.7",
+    "morgan": "1.10.0",
+    "nodemon": "2.0.3",
+    "winston": "3.2.1"
+  },
   "devDependencies": {
+    "@babel/cli": "7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "babel-jest": "^25.4.0",
@@ -41,9 +56,19 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "jest": "^25.4.0",
-    "parcel-bundler": "^1.12.4"
+    "rimraf": "3.0.2",
+    "supertest": "4.0.2",
+    "watch": "1.0.2"
   },
-  "browserslist": [
-    "last 1 Chrome versions"
-  ]
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node-modules/**/node_modules"
+    ],
+    "delay": "5000",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 4000
+    }
+  }
 }
