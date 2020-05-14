@@ -1,11 +1,9 @@
-import UserRepository from '../frameworks/persistence/userRepository/userRepository';
-import EmailService from '../frameworks/otherServices/emailService';
-import mongoClient from '../frameworks/dbDrivers/mongoDriver';
+import { MongoClient } from 'mongodb';
+import EmailService from '../frameworks/emailService/emailService';
+import DatabaseService from '../frameworks/databaseService/databaseService';
 
 const reposFactory = () => ({
-  DatabaseService: {
-    UserRepo: new UserRepository(mongoClient)
-  },
+  DatabaseService: new DatabaseService(MongoClient),
   EmailService
 });
 

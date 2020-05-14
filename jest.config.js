@@ -6,5 +6,8 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/dist',
     '<rootDir>/node_modules'
+  ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/common'
   ]
 };

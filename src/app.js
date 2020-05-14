@@ -11,14 +11,18 @@ const PORT = process.env.PORT || 4000;
 config(app);
 
 app.use('/api', routes(reposFactory));
-
 app.get('/', (req, res) => res.send('Up and Running'));
-
 app.all('*', (req, res) => res.status(404).send('Ooops! Not Found!!!'));
 
 export const server = http.createServer(app);
-server.listen(PORT, () => {
-  logger.debug(`Listening on port ${PORT}`);
-});
+reposFactory.DatabaseService.initDatabase()
+  .then(() => {
+    server.listen(PORT, () => {
+      logger.debug(`Listening on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    logger.info(err);
+  });
 
 export default app;

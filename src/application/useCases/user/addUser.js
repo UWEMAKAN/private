@@ -19,7 +19,7 @@ const addUser = (UserRepository, EmailService) => {
     newUser = await UserRepository.add(newUser);
     await EmailService.notify(newUser);
 
-    return 'user added successfully';
+    return newUser;
   }
 
   return {

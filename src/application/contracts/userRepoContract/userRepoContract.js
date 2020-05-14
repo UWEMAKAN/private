@@ -10,11 +10,11 @@ class UserRepoContract {
     throw new Error('not implemented');
   }
 
-  async update(userInstance, properties) {
+  async update(userId, properties) {
     throw new Error('not implemented');
   }
 
-  async delete(userInstance) {
+  async delete(userId) {
     throw new Error('not implemented');
   }
 
@@ -30,7 +30,7 @@ class UserRepoContract {
     throw new Error('not implemented');
   }
 
-  async addMessage(userInstance, message) {
+  async addMessage(userId, message) {
     throw new Error('not implemented');
   }
 
