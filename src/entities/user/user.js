@@ -7,7 +7,7 @@ class User {
     this.stateOfOrigin = data.stateOfOrigin;
     this.nationality = data.nationality;
     this.address = data.address;
-    this.createdAt = Date.now();
+    this.createdAt = Date();
     this.messages = [];
     this.photo = data.photo;
     this.location = data.location;

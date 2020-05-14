@@ -6,8 +6,12 @@ const router = (dependencies) => {
   const controller = userController(dependencies);
 
   userRouter.route('/')
-    .post(controller.addNewUser);
-
+    .post(controller.addNewUser)
+    .get(controller.getAllUsers);
+  userRouter.route('/:userId')
+    .get(controller.getUserById)
+    .patch(controller.updateUser)
+    .delete(controller.deleteUser);
   return userRouter;
 };
 

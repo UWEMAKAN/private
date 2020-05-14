@@ -4,6 +4,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 import appRoot from 'app-root-path';
 
+process.env.MONGO_URL = 'mongodb://localhost:27017';
+process.env.MONGODB_NAME = 'Agrotech';
+
 const config = (app) => {
   const accessLogStream = fs.createWriteStream(`${appRoot}/dist/logs/access.log`, { flags: 'a' });
 

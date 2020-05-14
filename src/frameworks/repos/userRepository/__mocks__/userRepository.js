@@ -40,4 +40,11 @@ export default class UserRepository {
       return Promise.reject(new Error('test user not found'));
     }
   }
+
+  async getAll() {
+    const users = [
+      {}, {}, {}, {}
+    ];
+    return Promise.resolve(users);
+  }
 }

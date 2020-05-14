@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import addUser from './addUser';
 import User from '../../../entities/user/user';
 import logger from '../../../common/winston';
@@ -11,7 +12,7 @@ const data = {
   nationality: 'Nigerian',
   address: '1B Bayo Adeyemo Street, Oke-Ira, Ogba, Lagos',
   photo: 'ajks;aowejowe',
-  location: 'Lago'
+  location: 'Lagos'
 };
 
 const user = new User(data);
@@ -23,9 +24,9 @@ const EmailService = {
 };
 
 const UserRepository = {
-  add: async (userInstance) => Promise.resolve(userInstance),
+  add: jest.fn(async (userInstance) => Promise.resolve(userInstance)),
 
-  getByEmail: async (emailAddress) => (emailAddress === 'uwemakan@gmail.com' ? null : user)
+  getByEmail: jest.fn(async (emailAddress) => (emailAddress === 'uwemakan@gmail.com' ? null : user))
 };
 
 describe('Testing use case addUser', () => {
@@ -52,7 +53,6 @@ describe('Testing use case addUser', () => {
     };
     expect.assertions(1);
     try {
-      // eslint-disable-next-line no-unused-vars
       const newUser = await Execute(incompleteData);
     } catch (err) {
       expect(err).toStrictEqual(Error('validation failed'));
@@ -65,7 +65,6 @@ describe('Testing use case addUser', () => {
     const userData = { ...data, emailAddress: 'uwemakan12@gmail.com' };
     expect.assertions(1);
     try {
-      // eslint-disable-next-line no-unused-vars
       const newUser = await Execute(userData);
     } catch (err) {
       expect(err).toStrictEqual(Error('email already exists'));
@@ -74,10 +73,10 @@ describe('Testing use case addUser', () => {
     }
   });
 
-  it('should return "user added successfully" if all conditions are met', async (done) => {
+  it('should return the newUser if all conditions are met', async (done) => {
     expect.assertions(1);
     const newUser = await Execute(data);
-    expect(newUser).toBe('user added successfully');
+    expect(newUser instanceof User).toBeTruthy();
     done();
   });
 });
