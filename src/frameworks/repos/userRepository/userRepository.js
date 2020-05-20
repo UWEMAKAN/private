@@ -31,7 +31,7 @@ class UserRepository extends UserRepoContract {
       return user;
     } catch (err) {
       logger.debug(err);
-      throw new Error('user not found');
+      throw new Error('user not updated');
     }
   }
 
@@ -77,7 +77,7 @@ class UserRepository extends UserRepoContract {
       return user;
     } catch (err) {
       logger.debug(err);
-      throw new Error('user not found');
+      throw new Error('user not deleted');
     }
   }
 

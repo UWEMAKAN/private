@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import userController from './userController';
-import User from '../entities/user/user';
-import logger from '../common/winston';
-import mockData from '../mockData';
+import UserRepository from '../../frameworks/repos/userRepository/userRepository';
+import User from '../../entities/user/user';
+import logger from '../../common/winston';
+import mockData from '../../mockData';
 
 const user = new User(mockData[0]);
 
@@ -77,7 +78,6 @@ describe('Testing User Controller', () => {
         const userInstance = await addNewUser({ ...req, body: {} }, res, next);
       } catch (err) {
         expect(err).toBeInstanceOf(Object);
-        // expect(err.status).toBe(400);
       } finally {
         done();
       }
@@ -103,7 +103,6 @@ describe('Testing User Controller', () => {
         const userInstance = await getUserById({ ...req, params: { userId: null } }, res, next);
       } catch (err) {
         expect(err).toBeInstanceOf(Object);
-        // expect(err.status).toBe(400);
       } finally {
         done();
       }
@@ -129,7 +128,6 @@ describe('Testing User Controller', () => {
         const userInstance = await updateUser({ ...req, params: { userId: null } }, res, next);
       } catch (err) {
         expect(err).toBeInstanceOf(Object);
-        // expect(err.status).toBe(400);
       } finally {
         done();
       }
@@ -155,7 +153,6 @@ describe('Testing User Controller', () => {
         const userInstance = await deleteUser({ ...req, params: { userId: null } }, res, next);
       } catch (err) {
         expect(err).toBeInstanceOf(Object);
-        // expect(err.status).toBe(400);
       } finally {
         done();
       }
