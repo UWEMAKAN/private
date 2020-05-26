@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import appRoot from 'app-root-path';
+import compression from 'compression';
 
 process.env.MONGO_URL = 'mongodb://localhost:27017';
 process.env.MONGODB_NAME = 'Agrotech';
@@ -25,6 +26,7 @@ const config = (app) => {
     return requestPath;
   });
 
+  app.use(compression());
   app.use(morgan((tokens, req, res) => [
     tokens.method(req, res),
     tokens.path(tokens, req, res),
