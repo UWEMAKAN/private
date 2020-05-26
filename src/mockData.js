@@ -1,3 +1,72 @@
+export const products = [
+  {
+    name: 'Fish',
+    category: 'Livestock',
+    quantity: 240,
+    price: 20
+  },
+  {
+    name: 'Chicken',
+    category: 'Livestock',
+    quantity: 200,
+    price: 25
+  },
+  {
+    name: 'Yam',
+    category: 'Crop',
+    quantity: 500,
+    price: 10
+  },
+  {
+    name: 'Potato',
+    category: 'Crop',
+    quantity: 1000,
+    price: 8
+  }
+];
+
+export const farmers = [
+  {
+    firstName: 'Farmer',
+    lastName: 'One',
+    emailAddress: 'farmerone@gmail.com',
+    phoneNumber: '09064907927',
+    stateOfOrigin: 'Akwa Ibom',
+    nationality: 'Nigerian',
+    address: '1B Bayo Adeyemo Street, Oke-Ira, Ogba, Lagos',
+    photo: 'ajks;aowejowe',
+    location: 'Lagos',
+    businessName: 'Farm One',
+    businessAddress: 'Farm One road, Lagos'
+  },
+  {
+    firstName: 'Farmer',
+    lastName: 'Two',
+    emailAddress: 'farmertwo@gmail.com',
+    phoneNumber: '09064907927',
+    stateOfOrigin: 'Akwa Ibom',
+    nationality: 'Nigerian',
+    address: '1B Bayo Adeyemo Street, Oke-Ira, Ogba, Lagos',
+    photo: 'ajks;aowejowe',
+    location: 'Lagos',
+    businessName: 'Farm Two',
+    businessAddress: 'Farm Two road, Lagos'
+  },
+  {
+    firstName: 'Farmer',
+    lastName: 'Three',
+    emailAddress: 'farmerthree@gmail.com',
+    phoneNumber: '09064907927',
+    stateOfOrigin: 'Akwa Ibom',
+    nationality: 'Nigerian',
+    address: '1B Bayo Adeyemo Street, Oke-Ira, Ogba, Lagos',
+    photo: 'ajks;aowejowe',
+    location: 'Lagos',
+    businessName: 'Farm Two',
+    businessAddress: 'Farm Two road, Lagos'
+  }
+];
+
 const mockData = [
   {
     firstName: 'Uwem',
