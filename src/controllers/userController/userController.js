@@ -1,10 +1,10 @@
 /* eslint-disable consistent-return */
-import AddUser from '../application/useCases/user/addUser';
-import GetAllUsers from '../application/useCases/user/getAllUsers';
-import GetUser from '../application/useCases/user/getUser';
-import UpdateUser from '../application/useCases/user/updateUser';
-import DeleteUser from '../application/useCases/user/deleteUser';
-import errorHandler from '../common/ErrorHandler';
+import AddUser from '../../application/useCases/user/addUser';
+import GetAllUsers from '../../application/useCases/user/getAllUsers';
+import GetUser from '../../application/useCases/user/getUser';
+import UpdateUser from '../../application/useCases/user/updateUser';
+import DeleteUser from '../../application/useCases/user/deleteUser';
+import errorHandler from '../../common/ErrorHandler';
 
 const controller = (dependencies) => {
   const { DatabaseService } = dependencies;
