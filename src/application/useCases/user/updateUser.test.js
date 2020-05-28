@@ -30,12 +30,12 @@ describe('Testing updateUser use case', () => {
     expect(Execute).toBeInstanceOf(Function);
   });
 
-  it('should return a list of users', async (done) => {
+  it('should return string success', async (done) => {
     const userId = '1';
     const update = {};
     const userInstance = await Execute(userId, update);
     expect.assertions(1);
-    expect(userInstance).toBeInstanceOf(User);
+    expect(typeof userInstance).toBe('string');
     done();
   });
 });

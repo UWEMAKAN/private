@@ -15,7 +15,7 @@ const ProductRepository = {
   update: jest.fn(async (productId, data) => (productId && data ? { ...products[0] } : Promise.reject(Error('product not added'))))
 };
 
-describe('Testing method delete of use case updateProduct', () => {
+describe('Testing use case updateProduct', () => {
   const command = updateProduct(FarmerRepository, ProductRepository);
   const { Execute } = command;
   it('should return an object with property Execute that is a function', () => {
@@ -46,7 +46,7 @@ describe('Testing method delete of use case updateProduct', () => {
     const product = await Execute(farmerId, productId, update);
     expect(FarmerRepository.getById).toBeCalled();
     expect(ProductRepository.update).toBeCalled();
-    expect(product).toBeInstanceOf(Object);
+    expect(typeof product).toBe('string');
     done();
   });
 });

@@ -19,7 +19,7 @@ const addProduct = (FarmerRepository, ProductRepository) => {
     // eslint-disable-next-line no-underscore-dangle
     await FarmerRepository.addProduct(data.ownerId, newProduct.ops[0]._id);
 
-    return newProduct;
+    return 'success';
   }
 
   return {

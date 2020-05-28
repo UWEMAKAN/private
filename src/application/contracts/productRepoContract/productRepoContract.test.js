@@ -18,7 +18,7 @@ describe('testing the add method', () => {
   it('should throw new Error("not implemented")', async (done) => {
     expect.assertions(1);
     try {
-      const value = await contract.addProduct(productInstance);
+      const value = await contract.getProduct(productInstance);
     } catch (err) {
       expect(err).toBeInstanceOf(Error);
     } finally {

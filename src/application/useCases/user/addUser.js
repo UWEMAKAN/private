@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import User from '../../../entities/user/user';
 
 const addUser = (UserRepository, EmailService) => {
@@ -5,7 +6,7 @@ const addUser = (UserRepository, EmailService) => {
     if (
       !data.firstName || !data.lastName || !data.emailAddress
       || !data.phoneNumber || !data.stateOfOrigin || !data.nationality
-      || !data.address || !data.photo || !data.location
+      || !data.address || !data.photo || !data.location || !data.id
     ) {
       throw new Error('validation failed');
     }
@@ -15,11 +16,12 @@ const addUser = (UserRepository, EmailService) => {
       throw new Error('email already exists');
     }
 
-    let newUser = new User(data);
+    const id = new ObjectId(data.id);
+    let newUser = new User({ ...data, id });
     newUser = await UserRepository.add(newUser);
     await EmailService.notify(newUser);
 
-    return newUser;
+    return 'success';
   }
 
   return {

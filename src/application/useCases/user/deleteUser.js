@@ -1,7 +1,7 @@
 const deleteUser = (UserRepository) => {
   async function Execute(userId) {
-    const deletedUser = await UserRepository.delete(userId);
-    return deletedUser;
+    await UserRepository.delete(userId);
+    return 'success';
   }
   return {
     Execute
