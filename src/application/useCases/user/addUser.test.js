@@ -12,7 +12,8 @@ const data = {
   nationality: 'Nigerian',
   address: '1B Bayo Adeyemo Street, Oke-Ira, Ogba, Lagos',
   photo: 'ajks;aowejowe',
-  location: 'Lagos'
+  location: 'Lagos',
+  id: '5ecf164f382bfa2bbbf48f06'
 };
 
 const user = new User(data);
@@ -24,7 +25,7 @@ const EmailService = {
 };
 
 const UserRepository = {
-  add: jest.fn(async (userInstance) => Promise.resolve(userInstance)),
+  add: jest.fn(async (userInstance) => Promise.resolve('success')),
 
   getByEmail: jest.fn(async (emailAddress) => (emailAddress === 'uwemakan@gmail.com' ? null : user))
 };
@@ -76,7 +77,7 @@ describe('Testing use case addUser', () => {
   it('should return the newUser if all conditions are met', async (done) => {
     expect.assertions(1);
     const newUser = await Execute(data);
-    expect(newUser instanceof User).toBeTruthy();
+    expect(typeof newUser).toBe('string');
     done();
   });
 });

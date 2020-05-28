@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 class User {
   constructor(data) {
+    this._id = data.id;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.emailAddress = data.emailAddress;

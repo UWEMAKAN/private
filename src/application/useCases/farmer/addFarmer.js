@@ -20,7 +20,7 @@ const addUser = (FarmerRepository, EmailService) => {
     newFarmer = await FarmerRepository.add(newFarmer);
     await EmailService.notify(newFarmer);
 
-    return newFarmer;
+    return 'success';
   }
 
   return {

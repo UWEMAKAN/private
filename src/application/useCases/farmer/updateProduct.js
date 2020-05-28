@@ -5,8 +5,8 @@ const updateProduct = (FarmerRepository, ProductRepository) => {
     if (!prodId) {
       throw new Error('not my product');
     }
-    const updatedProduct = await ProductRepository.update(productId, update);
-    return updatedProduct;
+    await ProductRepository.update(productId, update);
+    return 'success';
   }
   return {
     Execute

@@ -22,12 +22,13 @@ const doc = {
   lastName: 'Akan',
   emailAddress: 'uwemakan@gmail.com',
   password: 'uwemakan',
-  confirmPassword: 'uwemakan'
+  confirmPassword: 'uwemakan',
+  isFarmer: true
 };
 
 const document = {
-  insertOne: jest.fn((d = null) => (d ? { ...doc, hash: 'farmreach' } : Promise.reject(new Error('failed')))),
-  findOne: jest.fn((d) => (d.emailAddress ? { ...doc, hash: 'farmreach' } : Promise.reject(new Error('failed'))))
+  insertOne: jest.fn((d = null) => (d ? { ...doc, hash: 'farmreach', isFarmer: true } : Promise.reject(new Error('failed')))),
+  findOne: jest.fn((d) => (d.emailAddress ? { ...doc, hash: 'farmreach', isFarmer: true } : Promise.reject(new Error('failed'))))
 };
 const db = {
   collection: jest.fn().mockReturnValue(document)
@@ -161,7 +162,9 @@ describe('Testing the signinAuthentication method of AuthRepository', () => {
   it('should log the user in and return user', async (done) => {
     const data = { emailAddress: 'uwemkan@gmail.com', password: 'uwemakan' };
     const authorization = 'Bearer Token';
-    const output = { success: 'true', userId: '1', token: 'farmreach' };
+    const output = {
+      success: 'true', userId: '1', token: 'farmreach', isFarmer: true
+    };
     expect.assertions(1);
     try {
       const registeredUser = await authRepository.signinAuthentication(data, authorization);
@@ -176,7 +179,7 @@ describe('Testing the signinAuthentication method of AuthRepository', () => {
   it('should log the user in and return user', async (done) => {
     const data = { emailAddress: 'uwemkan@gmail.com', password: 'uwemakan' };
     const authorization = null;
-    const output = { id: '1' };
+    const output = { id: '1', isFarmer: true };
     try {
       const registeredUser = await authRepository.signinAuthentication(data, authorization);
       expect(registeredUser).toStrictEqual(output);
@@ -340,15 +343,13 @@ describe('Testing the createSessions method of AuthRepository', () => {
   const authRepository = new AuthRepository(mongoClient, bcrypt, redis, promisify);
   it('should create session for the registered user and return the session info', async (done) => {
     const { emailAddress } = doc;
-    const user = { emailAddress, _id: '1' };
-    expect.assertions(2);
+    const user = { emailAddress, _id: '5ecf164f382bfa2bbbf48f06' };
+    expect.assertions(4);
     try {
       const registeredUser = await authRepository.createSessions(user);
-      expect(registeredUser).toMatchObject({
-        success: expect.any(String),
-        userId: expect.any(String),
-        token: expect.any(String)
-      });
+      expect(typeof registeredUser.success).toBe('boolean');
+      expect(typeof registeredUser.id).toBe('string');
+      expect(typeof registeredUser.token).toBe('string');
       expect(promisify).toHaveBeenCalledWith(redisClient.set);
     } catch (err) {
       logger.debug(err);

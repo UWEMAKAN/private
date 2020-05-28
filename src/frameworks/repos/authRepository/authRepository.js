@@ -18,13 +18,13 @@ class AuthRepository {
 
   async register(input) {
     const {
-      firstName, lastName, emailAddress, password, phoneNumber
+      firstName, lastName, emailAddress, password, phoneNumber, isFarmer
     } = input;
     try {
       const salt = await this.bcrypt.genSalt(this.saltRounds);
       const hash = await this.bcrypt.hash(password, salt);
       const data = {
-        firstName, lastName, emailAddress, phoneNumber, hash
+        firstName, lastName, emailAddress, phoneNumber, isFarmer, hash
       };
       const { insertOne } = this.service.operations;
       const newRegistration = await this.service.execute(this.collection, insertOne, data);
@@ -48,13 +48,16 @@ class AuthRepository {
 
   async signinAuthentication(data, authorization) {
     try {
-      if (authorization) {
-        return this.getAuthTokenId(authorization);
-      }
       const { emailAddress, password } = data;
+      const user = await this.getByEmail(emailAddress);
+      const { isFarmer } = user;
+      if (authorization) {
+        const tokenId = await this.getAuthTokenId(authorization);
+        return { ...tokenId, isFarmer };
+      }
       const verifiedUser = await this.verifyUser(emailAddress, password);
       const session = await this.createSessions(verifiedUser);
-      return session;
+      return { ...session, isFarmer };
     } catch (err) {
       logger.debug(err);
       throw new Error('invalid login credentials');
@@ -132,7 +135,7 @@ class AuthRepository {
     try {
       const token = await this.signToken(emailAddress);
       const isSet = await this.setToken(token, id);
-      return isSet ? { success: 'true', userId: id, token } : null;
+      return isSet ? { success: true, id, token } : null;
     } catch (err) {
       logger.debug(err);
       throw new Error('failed to create session');

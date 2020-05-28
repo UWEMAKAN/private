@@ -6,9 +6,9 @@ const deleteProduct = (FarmerRepository, ProductRepository) => {
       throw new Error('not my product');
     }
     const productIds = farmer.products.filter((value) => value !== productId);
-    const deletedProduct = await ProductRepository.delete(productId);
+    await ProductRepository.delete(productId);
     await FarmerRepository.update(farmerId, { products: productIds });
-    return deletedProduct;
+    return 'success';
   }
   return {
     Execute
